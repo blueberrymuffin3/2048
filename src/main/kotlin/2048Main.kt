@@ -5,23 +5,26 @@ import org.openrndr.draw.Drawer
 import org.openrndr.draw.isolated
 import org.openrndr.draw.loadFont
 
-const val TILE_SIZE = 150.0
-const val PADDING = 20.0
+const val TILE_SIZE = 107.0
+const val PADDING = 15.0
 const val TOTAL_TILE_SIZE = TILE_SIZE + PADDING
+const val TOTAL_BOARD_SIZE = TOTAL_TILE_SIZE * Game2048.BOARD_SIZE + PADDING
+val TEXT_COLOR = ColorRGBa.fromHex(0x776e65)
+
 val game = Game2048()
 
 val gameTitle get() = "Jack Gordon's 2048 | Score: ${game.score}"
 
 fun main() = application {
     configure {
-        width = (TOTAL_TILE_SIZE * Game2048.BOARD_SIZE + PADDING).toInt()
-        height = (TOTAL_TILE_SIZE * Game2048.BOARD_SIZE + PADDING).toInt()
-        title = gameTitle
+        width = TOTAL_BOARD_SIZE.toInt()
+        height = TOTAL_BOARD_SIZE.toInt()
+        title = "Loading..."
     }
 
     program {
-
-        val font = loadFont("data/fonts/IBMPlexMono-Regular.ttf", 64.0)
+        val font = loadFont("https://ff.static.1001fonts.net/c/l/clear-sans.bold.ttf", 72.0)
+        window.title = gameTitle
         var gameIsOver = false
 
         keyboard.keyDown.listen {
@@ -55,7 +58,7 @@ fun main() = application {
                 }
             }
 
-            if(gameIsOver){
+            if (gameIsOver) {
                 drawer.fill = ColorRGBa(.8, .8, .8, .8)
                 drawer.rectangle(0.0, 0.0, width.toDouble(), height.toDouble())
 
@@ -89,10 +92,10 @@ fun drawTile(drawer: Drawer, x: Int, y: Int) = drawer.isolated {
 
     drawer.stroke = null
     drawer.fill = getColor(value)
-    drawer.rectangle(0.0, 0.0, TILE_SIZE, TILE_SIZE, 15.0)
+    drawer.rectangle(0.0, 0.0, TILE_SIZE, TILE_SIZE, 5.0)
 
     if (value > 0) {
-        drawer.fill = if (value > 4) ColorRGBa.WHITE else ColorRGBa.BLACK
-        drawer.textCenter(value.toString(), TILE_SIZE / 2, TILE_SIZE / 2)
+        drawer.fill = if (value > 4) ColorRGBa.fromHex(0xf9f6f2) else TEXT_COLOR
+        drawer.textCenter(value.toString(), TILE_SIZE / 2, TILE_SIZE / 2, TILE_SIZE - PADDING)
     }
 }

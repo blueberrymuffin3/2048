@@ -5,10 +5,10 @@ import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 /* the name of this project, default is the template version but you are free to change these */
-group = "org.openrndr.template"
+group = "com.appjackstudio.game2048"
 version = "0.3.12"
 
-val applicationMainClass = "2048MainKt"
+val applicationMainClass = "_2048MainKt"
 
 /*  Which additional (ORX) libraries should be added to this project. */
 val orxFeatures = setOf(
