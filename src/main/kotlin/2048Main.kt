@@ -38,12 +38,13 @@ fun main() = application {
                 }
                 if (direction != null) {
                     val didChange = game.slideAndMerge(direction)
-                    if (!game.canPlace()) {
-                        gameIsOver = true
-                    } else if (didChange) {
+                    if (didChange) {
                         game.placeRandomTile()
                     }
                     window.title = gameTitle
+                }
+                if(game.isGameOver){
+                    gameIsOver = true;
                 }
             }
         }

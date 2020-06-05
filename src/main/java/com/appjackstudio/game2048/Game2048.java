@@ -137,6 +137,17 @@ public class Game2048 {
         return flag;
     }
 
+    public boolean isGameOver(){
+        if(canPlace()) return false;
+        for (int x = 0; x < BOARD_SIZE; x++) {
+            for (int y = 0; y < BOARD_SIZE - 1; y++) {
+                if(get(Direction.DOWN, x, y) == get(Direction.DOWN, x, y + 1)) return false;
+                if(get(Direction.RIGHT, x, y) == get(Direction.RIGHT, x, y + 1)) return false;
+            }
+        }
+        return true;
+    }
+
     public int getScore() {
         return score;
     }
